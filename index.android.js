@@ -15,10 +15,12 @@ class StopWatch extends Component {
 
       this.state = {
         timeElapsed: null,
-        isRunning: false
+        isRunning: false,
+        startTime: null
       };
 
       this.handleStartPress = this.handleStartPress.bind(this);
+      this.handleLapPress = this.handleLapPress.bind(this);
     }
 
     startStopButton() {
@@ -48,11 +50,13 @@ class StopWatch extends Component {
         return;
       }
 
-      var startTime = new Date();
+      this.setState({
+        startTime: new Date()
+      });
 
       this.timer = setInterval(() => {
         this.setState({
-          timeElapsed: new Date() - startTime,
+          timeElapsed: new Date() - this.state.startTime,
           isRunning: true
         });
       }, 30);
@@ -60,12 +64,23 @@ class StopWatch extends Component {
 
     lapButton() {
       return (
-        <View style={styles.button}>
+        <TouchableHighlight
+          style={styles.button}
+          underlayColor="gray"
+          onPress={this.handleLapPress}>
           <Text>
             Lap
           </Text>
-        </View>
+        </TouchableHighlight>
       );
+    }
+
+    handleLapPress() {
+      var lap = this.state.timeElapsed;
+
+      this.setState({
+        startTime: new Date()
+      });
     }
 
     render() {
