@@ -38,12 +38,12 @@ class StopWatch extends Component {
        return (
          <View style={styles.container}>
              <View style={[styles.header, this.border('yellow')]}>
-                <View style={this.border('red')}>
+                <View style={[this.border('red'), styles.timerWrapper]}>
                   <Text>
                     00:00:00
                   </Text>
                 </View>
-                <View style={this.border('green')}>
+                <View style={[this.border('green'), styles.buttonWrapper]}>
                   {this.startStopButton()}
                   {this.lapButton()}
                 </View>
@@ -68,6 +68,17 @@ const styles = StyleSheet.create({
   },
   footer: { // Footer
     flex: 1,
+  },
+  timerWrapper: { // Red
+    flex: 5, // Take up 5/8 available space
+    justifyContent: 'center', // y
+    alignItems: 'center'
+  },
+  buttonWrapper: { // Green
+    flex: 3, // Take up 3/8 available space
+    flexDirection: 'row', // Side by side
+    justifyContent: 'space-around', // x
+    alignItems: 'center' // y
   }
 });
 
