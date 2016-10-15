@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {
     Text,
     View,
+    TouchableHighlight,
     AppRegistry,
     StyleSheet
 } from 'react-native';
@@ -9,12 +10,18 @@ import {
 class StopWatch extends Component {
     startStopButton() {
       return (
-        <View>
+        <TouchableHighlight
+          underlayColor="gray"
+          onPress={this.handleStartPress}>
           <Text>
              Start
           </Text>
-        </View>
+        </TouchableHighlight>
       );
+    }
+
+    handleStartPress() {
+      console.log('Start is pressed');
     }
 
     lapButton() {
@@ -72,7 +79,7 @@ const styles = StyleSheet.create({
   timerWrapper: { // Red
     flex: 5, // Take up 5/8 available space
     justifyContent: 'center', // y
-    alignItems: 'center'
+    alignItems: 'center' // x
   },
   buttonWrapper: { // Green
     flex: 3, // Take up 3/8 available space
