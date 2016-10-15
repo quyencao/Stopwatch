@@ -14,33 +14,46 @@ class StopWatch extends Component {
       super(props);
 
       this.state = {
-        timeElapsed: null
+        timeElapsed: null,
+        isRunning: false
       };
 
       this.handleStartPress = this.handleStartPress.bind(this);
     }
 
     startStopButton() {
+      var text = this.state.isRunning ? 'Stop' : 'Start';
+      var style = this.state.isRunning ? styles.stopButton : styles.startButton;
+
       return (
         <TouchableHighlight
           underlayColor="gray"
           onPress={this.handleStartPress}
-          style={[styles.startButton, styles.button]}>
+          style={[style, styles.button]}>
           <Text>
-             Start
+             {text}
           </Text>
         </TouchableHighlight>
       );
     }
 
     handleStartPress() {
+      if(this.state.isRunning) {
+        clearInterval(this.timer);
+        this.timer = undefined;
+        this.setState({
+          isRunning: false
+        });
+
+        return;
+      }
+
       var startTime = new Date();
 
-      var that = this;
-
-      setInterval(() => {
-        that.setState({
-          timeElapsed: new Date() - startTime
+      this.timer = setInterval(() => {
+        this.setState({
+          timeElapsed: new Date() - startTime,
+          isRunning: true
         });
       }, 30);
     }
@@ -114,6 +127,9 @@ const styles = StyleSheet.create({
   },
   startButton: {
     borderColor: '#00CC00'
+  },
+  stopButton: {
+    borderColor: '#CC0000'
   }
 });
 
