@@ -24,7 +24,8 @@ class StopWatch extends Component {
       return (
         <TouchableHighlight
           underlayColor="gray"
-          onPress={this.handleStartPress}>
+          onPress={this.handleStartPress}
+          style={[styles.startButton, styles.button]}>
           <Text>
              Start
           </Text>
@@ -46,7 +47,7 @@ class StopWatch extends Component {
 
     lapButton() {
       return (
-        <View>
+        <View style={styles.button}>
           <Text>
             Lap
           </Text>
@@ -54,28 +55,21 @@ class StopWatch extends Component {
       );
     }
 
-    border(color) {
-      return {
-        borderColor: color,
-        borderWidth: 4
-      }
-    }
-
     render() {
        return (
          <View style={styles.container}>
-             <View style={[styles.header, this.border('yellow')]}>
-                <View style={[this.border('red'), styles.timerWrapper]}>
-                  <Text>
+             <View style={styles.header}>
+                <View style={styles.timerWrapper}>
+                  <Text style={styles.timer}>
                     {FormatTime(this.state.timeElapsed)}
                   </Text>
                 </View>
-                <View style={[this.border('green'), styles.buttonWrapper]}>
+                <View style={styles.buttonWrapper}>
                   {this.startStopButton()}
                   {this.lapButton()}
                 </View>
              </View>
-             <View style={[styles.footer, this.border('blue')]}>
+             <View style={styles.footer}>
                <Text>
                  I am a list of Laps
                </Text>
@@ -106,6 +100,20 @@ const styles = StyleSheet.create({
     flexDirection: 'row', // Side by side
     justifyContent: 'space-around', // x
     alignItems: 'center' // y
+  },
+  timer: {
+    fontSize: 60
+  },
+  button: {
+    borderWidth: 2,
+    height: 100,
+    width: 100,
+    borderRadius: 50,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  startButton: {
+    borderColor: '#00CC00'
   }
 });
 
